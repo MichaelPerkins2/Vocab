@@ -10,6 +10,11 @@
 		CAC59A0C2E0624F6001871A4 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC59A0B2E0624F6001871A4 /* MainView.swift */; };
 		CAC59A0E2E062505001871A4 /* DictionaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC59A0D2E062505001871A4 /* DictionaryView.swift */; };
 		CAC59A102E08EB20001871A4 /* WordEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC59A0F2E08EB20001871A4 /* WordEntry.swift */; };
+		CAC59A122E0B2391001871A4 /* Secrets.plist in Resources */ = {isa = PBXBuildFile; fileRef = CAC59A112E0B2391001871A4 /* Secrets.plist */; };
+		CAC59A142E0B3839001871A4 /* DictionaryAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC59A132E0B3839001871A4 /* DictionaryAPIService.swift */; };
+		CAC59A162E0B387D001871A4 /* Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC59A152E0B387D001871A4 /* Dictionary.swift */; };
+		CAC59A1C2E0B40C3001871A4 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC59A1B2E0B40C3001871A4 /* MainTabView.swift */; };
+		CAC59A1E2E0B4184001871A4 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC59A1D2E0B4184001871A4 /* ProfileView.swift */; };
 		CAC8704E2D476A070080BD3B /* VocabApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC8704D2D476A070080BD3B /* VocabApp.swift */; };
 		CAC870522D476A0A0080BD3B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CAC870512D476A0A0080BD3B /* Assets.xcassets */; };
 		CAC870552D476A0A0080BD3B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CAC870542D476A0A0080BD3B /* Preview Assets.xcassets */; };
@@ -39,6 +44,11 @@
 		CAC59A0B2E0624F6001871A4 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		CAC59A0D2E062505001871A4 /* DictionaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryView.swift; sourceTree = "<group>"; };
 		CAC59A0F2E08EB20001871A4 /* WordEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordEntry.swift; sourceTree = "<group>"; };
+		CAC59A112E0B2391001871A4 /* Secrets.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Secrets.plist; sourceTree = "<group>"; };
+		CAC59A132E0B3839001871A4 /* DictionaryAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryAPIService.swift; sourceTree = "<group>"; };
+		CAC59A152E0B387D001871A4 /* Dictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dictionary.swift; sourceTree = "<group>"; };
+		CAC59A1B2E0B40C3001871A4 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
+		CAC59A1D2E0B4184001871A4 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		CAC8704A2D476A070080BD3B /* Vocab.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vocab.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CAC8704D2D476A070080BD3B /* VocabApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VocabApp.swift; sourceTree = "<group>"; };
 		CAC870512D476A0A0080BD3B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -75,6 +85,41 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CAC59A172E0B38A4001871A4 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				CAC59A0F2E08EB20001871A4 /* WordEntry.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		CAC59A182E0B38AE001871A4 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				CAC59A132E0B3839001871A4 /* DictionaryAPIService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		CAC59A192E0B38C0001871A4 /* Stores */ = {
+			isa = PBXGroup;
+			children = (
+				CAC59A152E0B387D001871A4 /* Dictionary.swift */,
+			);
+			path = Stores;
+			sourceTree = "<group>";
+		};
+		CAC59A1A2E0B38C9001871A4 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				CAC59A0B2E0624F6001871A4 /* MainView.swift */,
+				CAC59A0D2E062505001871A4 /* DictionaryView.swift */,
+				CAC59A1B2E0B40C3001871A4 /* MainTabView.swift */,
+				CAC59A1D2E0B4184001871A4 /* ProfileView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		CAC870412D476A070080BD3B = {
 			isa = PBXGroup;
 			children = (
@@ -98,10 +143,12 @@
 		CAC8704C2D476A070080BD3B /* Vocab */ = {
 			isa = PBXGroup;
 			children = (
-				CAC59A0F2E08EB20001871A4 /* WordEntry.swift */,
 				CAC8704D2D476A070080BD3B /* VocabApp.swift */,
-				CAC59A0B2E0624F6001871A4 /* MainView.swift */,
-				CAC59A0D2E062505001871A4 /* DictionaryView.swift */,
+				CAC59A192E0B38C0001871A4 /* Stores */,
+				CAC59A182E0B38AE001871A4 /* Services */,
+				CAC59A172E0B38A4001871A4 /* Models */,
+				CAC59A1A2E0B38C9001871A4 /* Views */,
+				CAC59A112E0B2391001871A4 /* Secrets.plist */,
 				CAC870512D476A0A0080BD3B /* Assets.xcassets */,
 				CAC870532D476A0A0080BD3B /* Preview Content */,
 			);
@@ -238,6 +285,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CAC870552D476A0A0080BD3B /* Preview Assets.xcassets in Resources */,
+				CAC59A122E0B2391001871A4 /* Secrets.plist in Resources */,
 				CAC870522D476A0A0080BD3B /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -263,10 +311,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CAC59A1E2E0B4184001871A4 /* ProfileView.swift in Sources */,
+				CAC59A142E0B3839001871A4 /* DictionaryAPIService.swift in Sources */,
 				CAC59A102E08EB20001871A4 /* WordEntry.swift in Sources */,
 				CAC59A0C2E0624F6001871A4 /* MainView.swift in Sources */,
 				CAC59A0E2E062505001871A4 /* DictionaryView.swift in Sources */,
+				CAC59A1C2E0B40C3001871A4 /* MainTabView.swift in Sources */,
 				CAC8704E2D476A070080BD3B /* VocabApp.swift in Sources */,
+				CAC59A162E0B387D001871A4 /* Dictionary.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

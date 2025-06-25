@@ -23,7 +23,7 @@ struct MainView: View {
                     .padding()
                 // Button: for fetching word from api and saving word and info to dictionary
                 Button("Search") {
-                    // todo: ensure input is a valid word
+                    // TODO: ensure input is a valid word
                     
                     // call api to search for it
                     let apiService = DictionaryAPIService()
@@ -40,13 +40,13 @@ struct MainView: View {
                 }
                 .buttonStyle(.borderedProminent)
                 
-                // todo: display word and definition/info, or message indicating it was not found
+                // TODO: display word and definition/info, or message indicating it was not found
                 if let word = resultWord {
                     VStack(alignment: .leading) {
                         Text(word.word)
-                            .font(.headline)
+                            .font(.largeTitle)
                         Text(word.partOfSpeech)
-                            .font(.subheadline)
+                            .italic()
                         ForEach(word.definitions, id: \.self) { def in
                             Text(def)
                                 .font(.body)

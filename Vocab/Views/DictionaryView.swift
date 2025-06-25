@@ -15,12 +15,12 @@ struct DictionaryView: View {
             List(dictionary.vocabList) { entry in
                 VStack(alignment: .leading) {
                     Text(entry.word)
-                        .font(.headline)
+                        .font(.largeTitle)
+                    Text(entry.partOfSpeech)
+                        .italic()
                     ForEach(entry.definitions, id: \.self) { def in
                         Text(def)
                             .font(.subheadline)
-                            .lineLimit(1)
-                            .truncationMode(.tail)
                     }
                 }
                 

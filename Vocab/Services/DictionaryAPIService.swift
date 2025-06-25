@@ -1,42 +1,25 @@
 //
-//  WordEntry.swift
+//  DictionaryAPIService.swift
 //  Vocab
 //
-//  Created by Michael Perkins on 6/20/25.
+//  Created by Michael Perkins on 6/24/25.
 //
 
 import Foundation
 
-struct WordEntry: Identifiable {
-    var id = UUID()
-    var word : String
-    var definitions : [String]
-    var partOfSpeech : String
-    var dateAdded : Date
-    var memorized : Bool
-}
-
-class Dictionary: ObservableObject {
-    @Published var vocabList: [WordEntry] = []
-    
-    func addWord(wordEntry : WordEntry) {
-        // check if word already exists in dictionary
-        if !vocabList.contains(where: {$0.word.lowercased() == wordEntry.word.lowercased() }) {
-            
-            vocabList.append(wordEntry)
-        }
-    }
-    
-    func deleteWord(){}
-    func editWord(){}
-}
-
 class DictionaryAPIService {
-    // todo: create environment variable for api key?
-    let apiKey = ""
     
     func fetchWord(for word: String) async throws -> WordEntry {
-        var apiEndpoint = "https://www.dictionaryapi.com/api/v3/references/collegiate/json/\(word)?key=\(apiKey)"
+        guard let apiKeyPath = Bundle.main.path(forResource: "Secrets", ofType: "plist") else {
+            fatalError("Could not find file 'Secrets.plist'")
+        }
+        let plist = NSDictionary(contentsOfFile: apiKeyPath)
+        guard let apiKey = plist?.object(forKey: "MERRIAM_WEBSTER_API_KEY") as? String else {
+            fatalError("Could not find key 'MERRIAM_WEBSTER_API_KEY'")
+        }
+        
+        
+        let apiEndpoint = "https://www.dictionaryapi.com/api/v3/references/collegiate/json/\(word)?key=\(apiKey)"
         guard let urlEndpoint = URL(string: apiEndpoint) else {
             throw URLError(.badURL)
         }
