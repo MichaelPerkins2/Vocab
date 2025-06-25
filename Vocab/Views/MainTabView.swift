@@ -8,8 +8,32 @@
 import SwiftUI
 
 struct MainTabView: View {
+    @EnvironmentObject var dictionary: Dictionary
+    
+    @State private var selectedTab = 1
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        TabView(selection: $selectedTab) {
+            // TODO: fix later for newer versions of xcode/ios
+            DictionaryView()
+                .tabItem {
+                    Image(systemName: "book.closed.fill")
+                    Text("Dictionary")
+                }
+                .tag(0)
+            MainView()
+                .tabItem {
+                    Image(systemName: "house.fill")
+                    Text("Home")
+                }
+                .tag(1)
+            ProfileView()
+                .tabItem {
+                    Image(systemName: "person.crop.circle.fill")
+                    Text("Profile")
+                }
+                .tag(2)
+        }
     }
 }
 

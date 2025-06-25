@@ -13,7 +13,7 @@ struct VocabApp: App {
     
     var body: some Scene {
         WindowGroup {
-            MainView()
+            MainTabView()
                 .environmentObject(dictionary)
         }
     }

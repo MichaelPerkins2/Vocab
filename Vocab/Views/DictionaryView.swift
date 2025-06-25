@@ -11,25 +11,27 @@ struct DictionaryView: View {
     @EnvironmentObject var dictionary: Dictionary
     
     var body: some View {
-        VStack {
-            List(dictionary.vocabList) { entry in
-                VStack(alignment: .leading) {
-                    Text(entry.word)
-                        .font(.largeTitle)
-                    Text(entry.partOfSpeech)
-                        .italic()
-                    ForEach(entry.definitions, id: \.self) { def in
-                        Text(def)
-                            .font(.subheadline)
+        NavigationView {
+            VStack {
+                List(dictionary.vocabList) { entry in
+                    VStack(alignment: .leading) {
+                        Text(entry.word)
+                            .font(.largeTitle)
+                        Text(entry.partOfSpeech)
+                            .italic()
+                        ForEach(entry.definitions, id: \.self) { def in
+                            Text(def)
+                                .font(.subheadline)
+                        }
                     }
+                    
                 }
                 
+                Spacer()
+                
             }
-            
-            Spacer()
-            
+            .navigationTitle("My Dictionary")
         }
-        .navigationTitle("Dictionary")
     }
 }
 

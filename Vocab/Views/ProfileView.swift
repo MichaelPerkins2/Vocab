@@ -8,8 +8,39 @@
 import SwiftUI
 
 struct ProfileView: View {
+    @State private var darkMode: Bool = false // TODO: connect to environment or settings bundle
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationView {
+            Form {
+                Section(header: Text ("Preferences")) {
+                    Toggle("Dark Mode", isOn: $darkMode)
+                }
+                Section(header: Text("Settings")) {
+                    HStack {
+                        Text("Username")    // TODO: display username, email, password next to these fields
+                        Spacer()
+                        Text("JohnDoe123")
+                            .foregroundColor(.gray)
+                    }
+                    HStack {
+                        Text("Email")
+                        Spacer()
+                        Text("johndoe123@mail.com")
+                            .foregroundColor(.gray)
+                            .textContentType(.none)
+                    }
+                    HStack {
+                        Text("Password")
+                        Spacer()
+                        Text("Password123")
+                            .foregroundColor(.gray)
+                            .monospaced()
+                    }
+                }
+            }
+            .navigationTitle("Profile")
+        }
     }
 }
 

@@ -58,14 +58,8 @@ struct MainView: View {
                 
                 Spacer()
                 
-                // NavigationLink or Button to DictionaryView
-                NavigationLink(destination: DictionaryView()) {
-                    Text("Go to Dictionary")
-                }
-                .padding()
-                
             }
-            .navigationTitle("Vocabulary Builder")
+            .navigationTitle("Vocab App")
         }
     }
 }
