@@ -9,12 +9,14 @@ import SwiftUI
 
 @main
 struct VocabApp: App {
-    var dictionary = Dictionary()
+
+    var dictionaryManager = DictionaryManager(context: PersistenceController.shared.container.viewContext)
     
     var body: some Scene {
         WindowGroup {
             MainTabView()
-                .environmentObject(dictionary)
+                .environmentObject(dictionaryManager)
+                .environment(\.managedObjectContext, PersistenceController.shared.container.viewContext)
         }
     }
 }

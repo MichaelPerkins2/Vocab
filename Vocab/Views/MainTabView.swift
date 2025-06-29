@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct MainTabView: View {
-    @EnvironmentObject var dictionary: Dictionary
+    @EnvironmentObject var dictionary: DictionaryManager
     
     @State private var selectedTab = 1
     

@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ProfileView: View {
     @State private var darkMode: Bool = false // TODO: connect to environment or settings bundle
+    @Environment(\.managedObjectContext) var viewContext
     
     var body: some View {
         NavigationView {
@@ -26,9 +27,8 @@ struct ProfileView: View {
                     HStack {
                         Text("Email")
                         Spacer()
-                        Text("johndoe123@mail.com")
+                        Text("\("johndoe@example.com")")
                             .foregroundColor(.gray)
-                            .textContentType(.none)
                     }
                     HStack {
                         Text("Password")

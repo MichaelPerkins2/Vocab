@@ -7,11 +7,13 @@
 
 import Foundation
 
-struct WordEntry: Identifiable {
-    var id = UUID()
-    var word : String
-    var definitions : [String]
-    var partOfSpeech : String
-    var dateAdded : Date
-    var memorized : Bool
-}
+// Replaced by Core Data Entity
+
+//struct WordEntry: Identifiable {
+//    var id = UUID()
+//    var word : String
+//    var definitions : [String]
+//    var partOfSpeech : String
+//    var dateAdded : Date
+//    var memorized : Bool
+//}

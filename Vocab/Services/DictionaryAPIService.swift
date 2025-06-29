@@ -9,7 +9,7 @@ import Foundation
 
 class DictionaryAPIService {
     
-    func fetchWord(for word: String) async throws -> WordEntry {
+    func fetchWord(for word: String) async throws -> APIResponse {
         guard let apiKeyPath = Bundle.main.path(forResource: "Secrets", ofType: "plist") else {
             fatalError("Could not find file 'Secrets.plist'")
         }
@@ -29,26 +29,20 @@ class DictionaryAPIService {
         
         let decodedData = try JSONDecoder().decode([APIResponse].self, from: data)
         
-        guard let first = decodedData.first else {
+        guard let wordData = decodedData.first else {
             throw NSError(domain: "No entries found", code: 0)
         }
         
-        return WordEntry(
-            word: first.meta.id,
-            definitions: first.shortdef,
-            partOfSpeech: first.fl,
-            dateAdded: Date(),
-            memorized: false
-        )
+        return wordData
     }
     
     struct APIResponse: Decodable {
         let meta : Meta
-        let fl : String
-        let shortdef : [String]
+        let fl : String             // part of speech
+        let shortdef : [String]     // array of definitions
     }
     
     struct Meta: Decodable {
-        let id: String
+        let id: String              // vocab word
     }
 }
