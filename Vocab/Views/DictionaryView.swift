@@ -24,29 +24,51 @@ struct DictionaryView: View {
                     Text("Added words will be displayed here")
                 }
 
-                List(words) { entry in
-                    VStack(alignment: .leading) {
-                        Text(entry.word ?? "")
-                            .font(.headline)
-                        Text(entry.partOfSpeech ?? "")
-                            .italic()
-                        if let definitions = entry.definitions as? [String] {
-                            ForEach(definitions, id: \.self) { def in
-                                Text(def)
-                                    .font(.subheadline)
+                List {
+                    ForEach(words) { entry in
+                        VStack(alignment: .leading) {
+                            Text(entry.word ?? "")
+                                .font(.headline)
+                            Text(entry.partOfSpeech ?? "")
+                                .italic()
+                            if let definitions = entry.definitions as? [String] {
+                                ForEach(definitions, id: \.self) { def in
+                                    Text(def)
+                                        .font(.subheadline)
+                                }
                             }
                         }
-                        
                     }
-                    
-//                    Spacer()
+                    .onDelete(perform: delete)
                 }
+                
+                // Temporary--for testing Core Data
+                .onAppear {
+                    print("💾 WORD COUNT: \(words.count)")
+                    for word in words {
+                        print("🟢", word.word ?? "nil")
+                        print("-", word.id ?? "nil")
+                        print("-", word.partOfSpeech ?? "nil")
+                        print("-", word.memorized)
+                    }
+                }
+
+                Spacer()
             }
             .navigationTitle("My Dictionary")
             
         }
     }
+    
+    func delete(at offsets: IndexSet) {
+        for index in offsets {
+            let word = words[index]
+            dictionaryManager.deleteWord(word: word)
+        }
+    }
 }
+
+
 
 struct DictionaryPreviews: PreviewProvider {
     static var previews: some View {

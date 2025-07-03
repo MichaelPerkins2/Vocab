@@ -33,7 +33,7 @@ class DictionaryManager: ObservableObject {
 //    }
     
     // add valid word to user's dictionary
-    func addWord(word : String, partOfSpeech: String, definitions: [String]) -> WordEntry? {
+    func addWord(word : String, partOfSpeech: String, definitions: [String]) {
         do {
             let request = NSFetchRequest<WordEntry>(entityName: "WordEntry")
             request.predicate = NSPredicate(format: "word =[c] %@", word)
@@ -43,6 +43,7 @@ class DictionaryManager: ObservableObject {
             // check if word already exists in dictionary
             if existingWord.isEmpty {
                 let newEntry = WordEntry(context: viewContext)
+                newEntry.id = UUID()
                 newEntry.word = word
                 newEntry.partOfSpeech = partOfSpeech
                 newEntry.definitions = definitions as NSArray
@@ -50,17 +51,43 @@ class DictionaryManager: ObservableObject {
                 newEntry.memorized = false
                 
                 try viewContext.save()
-                return newEntry
+//                return newEntry
                 
             } else {
-                return existingWord.first
+//                return existingWord.first
             }
         } catch {
             print(error)
-            return nil
+//            return nil
         }
     }
     
-    func deleteWord(){}
+    func deleteWord(word : WordEntry) {
+        do {
+            viewContext.delete(word)
+            
+            try viewContext.save()
+        } catch {
+            print(error)
+        }
+    }
     func editWord(){}
+    func clearDictionary(){
+        do {
+            // fetch all WordEntry objects (for use in the delete)
+            let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "WordEntry")
+            let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+            deleteRequest.resultType = .resultTypeObjectIDs
+            
+            // execute delete
+            let batchDelete = try viewContext.execute(deleteRequest) as? NSBatchDeleteResult
+            
+            // update SwiftUI to reflect the deletion
+            guard let deleteResult = batchDelete?.result as? [NSManagedObjectID] else { fatalError("Unexpected result type.") }
+            NSManagedObjectContext.mergeChanges(fromRemoteContextSave: [NSDeletedObjectsKey : deleteResult], into: [viewContext])
+            
+        } catch {
+            print(error)
+        }
+    }
 }

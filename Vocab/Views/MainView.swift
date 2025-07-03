@@ -10,7 +10,7 @@ import SwiftUI
 struct MainView: View {
     // State variable to hold current search variable
     @State private var vocabWord: String = ""
-    @State private var resultWord: WordEntry? = nil
+    @State private var resultWord: SearchResult? = nil
     // Access the shared Dictionary via @EnvironmentObject
     @EnvironmentObject var dictionaryManager: DictionaryManager
     @Environment(\.managedObjectContext) var viewContext
@@ -23,6 +23,7 @@ struct MainView: View {
                     TextField("Search for a vocabulary word", text: $vocabWord)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                         .padding()
+                        .textInputAutocapitalization(.never)
                     // Button: for fetching word from api and saving word and info to dictionary
                     Button("Search") {
                         // TODO: ensure input is a valid word
@@ -34,7 +35,9 @@ struct MainView: View {
                                 let fetchedWord = try await apiService.fetchWord(for: vocabWord)
                                 
                                 // add word to Core Data dictionary
-                                resultWord = dictionaryManager.addWord(word: fetchedWord.meta.id, partOfSpeech: fetchedWord.fl, definitions: fetchedWord.shortdef)
+                                dictionaryManager.addWord(word: fetchedWord.meta.id, partOfSpeech: fetchedWord.fl, definitions: fetchedWord.shortdef)
+                                // set resultWord to be displayed
+                                resultWord = SearchResult(word: fetchedWord.meta.id, partOfSpeech: fetchedWord.fl, definitions: fetchedWord.shortdef)
 
                             } catch {
                                 print("API error:", error)
@@ -43,6 +46,7 @@ struct MainView: View {
                         }
                     }
                     .buttonStyle(.borderedProminent)
+                    .padding()
                 }
                 
                 // TODO: display word and definition/info, OR message indicating it was not found
@@ -59,11 +63,18 @@ struct MainView: View {
                         }
                     }
                 }
-                
+                Spacer()
             }
             .navigationTitle("Vocab App")
         }
     }
+}
+
+struct SearchResult: Identifiable {
+    let id = UUID()
+    let word: String
+    let partOfSpeech: String
+    let definitions: [String]
 }
 
 struct MainView_Previews: PreviewProvider {
